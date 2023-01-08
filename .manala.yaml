@@ -1,0 +1,22 @@
+####################################################################
+# !!! REMINDER !!!                                                 #
+# Don't forget to run `manala up` each time you update this file ! #
+####################################################################
+
+manala:
+    recipe: lazy.ansible
+
+###########
+# Project #
+###########
+
+project:
+    name: lpdevops
+
+##########
+# System #
+##########
+
+system:
+    ansible:
+        version: 2.14.1
