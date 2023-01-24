@@ -9,15 +9,17 @@ services:
     system:
         hostname: lpdevops
         build:
-            context: .
+            context: ..
+            dockerfile: docker/Dockerfile
             target: system
-        image: lpdevops:20230108204314
+        image: lpdevops:20230124203207
         volumes:
             - ../..:${DIR}
+        tmpfs:
+          - /tmp
         environment:
             DIR: ${DIR}
             CACHE_DIR: ${CACHE_DIR}
         working_dir: ${DIR}
-        entrypoint: .manala/docker/entrypoint.sh
         # Use default docker bridge network
         network_mode: bridge

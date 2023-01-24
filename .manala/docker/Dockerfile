@@ -18,10 +18,13 @@ ARG GOMPLATE_VERSION=3.11.3
 ENV container="docker"
 
 RUN \
+    # Disable all debian user interaction
+    export DEBIAN_FRONTEND="noninteractive" \
     # Backports
-    printf "deb http://deb.debian.org/debian ${DEBIAN}-backports main" > /etc/apt/sources.list.d/backports.list \
-    && apt-get update \
-    && apt-get install --yes --no-install-recommends \
+    && printf "deb http://deb.debian.org/debian ${DEBIAN}-backports main" > /etc/apt/sources.list.d/backports.list \
+    && apt-get --quiet --allow-releaseinfo-change update \
+    && apt-get --quiet --yes --purge --auto-remove dist-upgrade \
+    && apt-get --quiet --yes --no-install-recommends --verbose-versions install \
         s6 \
         sudo \
         curl \
@@ -35,6 +38,8 @@ RUN \
         less \
         vim \
         socat \
+    # Apt keyrings (debian < bookworm)
+    && mkdir -p 755 /etc/apt/keyrings \
     # User
     && addgroup --gid ${GROUP_ID} lazy \
     && adduser --home /home/lazy --shell /bin/bash --uid ${USER_ID} --gecos lazy --ingroup lazy --disabled-password lazy \
@@ -62,7 +67,9 @@ FROM base AS system
 ARG DEBIAN
 
 RUN \
-    apt-get install --yes --no-install-recommends \
+    # Disable all debian user interaction
+    export DEBIAN_FRONTEND="noninteractive" \
+    && apt-get --quiet --yes --no-install-recommends --verbose-versions install \
       openssh-client \
       sshpass \
       python3 python3-pip \
@@ -76,3 +83,6 @@ RUN \
 RUN \
     pip3 install ansible-core==2.14.1
 
+# Entrypoint
+COPY docker/entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
