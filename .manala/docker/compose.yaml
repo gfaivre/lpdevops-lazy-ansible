@@ -11,12 +11,9 @@ services:
         build:
             context: ..
             dockerfile: docker/Dockerfile
-            target: system
-        image: lpdevops:20230129001716
+        image: lpdevops:20230221141601
         volumes:
             - ../..:${DIR}
-        tmpfs:
-          - /tmp
         environment:
             DIR: ${DIR}
             CACHE_DIR: ${CACHE_DIR}
