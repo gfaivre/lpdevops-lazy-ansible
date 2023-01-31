@@ -12,7 +12,7 @@ services:
             context: ..
             dockerfile: docker/Dockerfile
             target: system
-        image: lpdevops:20230124203207
+        image: lpdevops:20230129001716
         volumes:
             - ../..:${DIR}
         tmpfs:

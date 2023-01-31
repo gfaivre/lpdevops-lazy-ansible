@@ -22,10 +22,13 @@ system:
         version: 2.14.1
         config: |
             [defaults]
-            control_path_dir = /tmp/ansible/%%h-%%r
+            control_path_dir = /tmp/ansible/cp
             [privilege_escalation]
             become = True
             become_flags = -H -S
+            [ssh_connection]
+            control_path = /tmp/%%h-%%r
+
     ssh:
         config: |
             Host *
