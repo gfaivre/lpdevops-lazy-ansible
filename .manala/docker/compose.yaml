@@ -11,12 +11,12 @@ services:
         build:
             context: ..
             dockerfile: docker/Dockerfile
-        image: lpdevops:20230221141601
+        image: lpdevops:20230226135826
         volumes:
-            - ../..:${DIR}
+            - ../..:${MANALA_DIR}
         environment:
-            DIR: ${DIR}
-            CACHE_DIR: ${CACHE_DIR}
-        working_dir: ${DIR}
+            MANALA_DIR: ${MANALA_DIR}
+            MANALA_CACHE_DIR: ${MANALA_CACHE_DIR}
+        working_dir: ${MANALA_DIR}
         # Use default docker bridge network
         network_mode: bridge
