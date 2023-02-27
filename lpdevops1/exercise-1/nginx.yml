@@ -1,0 +1,27 @@
+# in file nginx.yml
+---
+- hosts: web
+
+  pre_tasks:
+    - name : APT index update
+      ansible.builtin.apt:
+        update_cache: yes
+        name:
+          - nginx
+  tasks:
+    - name: Ensure Nginx service is started
+      ansible.builtin.service:
+        name: nginx
+        state: started
+    - name: Copy Nginx configuration file
+      ansible.builtin.copy:
+        src: nginx/status.conf
+        dest: /etc/nginx/conf.d/status.conf
+      notify:
+        - restart_nginx
+
+  handlers:
+    - name: restart_nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

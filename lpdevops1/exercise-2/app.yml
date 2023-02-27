@@ -1,0 +1,20 @@
+
+- name: Installing Git and PHP server
+  hosts: app
+  tasks:
+    - name: Installing packages
+      ansible.builtin.apt:
+        pkg:
+          - php-fpm
+          - git
+    - name: Ensure PHP is enabled and running
+      ansible.builtin.service:
+        name: php7.4-fpm
+        enabled: true
+        state: started
+    - name: Copy PHP configuration file
+      ansible.builtin.copy:
+        src: php/php.ini
+        dest: /etc/php/7.4/fpm/php.ini
+      notify:
+          - restart_php-fpm

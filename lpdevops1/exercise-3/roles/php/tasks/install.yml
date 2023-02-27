@@ -1,0 +1,10 @@
+- name: Installing packages
+  ansible.builtin.apt:
+    name: "{{ php_version }}"
+    update_cache: true
+
+- name: Ensure PHP is enabled and running
+  ansible.builtin.service:
+    name: php7.4-fpm
+    enabled: true
+    state: started

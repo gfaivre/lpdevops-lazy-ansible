@@ -1,0 +1,12 @@
+- name: Installing MariaDB server
+  hosts: db
+  tasks:
+    - name: Latest MariaDB version installed
+      ansible.builtin.apt:
+        name: mariadb-server
+        state: latest
+    - name: Ensure MariaDB is enabled and running
+      ansible.builtin.service:
+        name: mariadb
+        enabled: true
+        state: started

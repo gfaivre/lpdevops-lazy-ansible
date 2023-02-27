@@ -1,0 +1,12 @@
+---
+
+- name: Common tasks
+  hosts: all
+  pre_tasks:
+    - ansible.builtin.import_tasks: common_tasks.yml
+  handlers:
+    - ansible.builtin.import_tasks: handlers.yml
+
+- ansible.builtin.import_playbook: webservers.yml
+- ansible.builtin.import_playbook: databases.yml
+- ansible.builtin.import_playbook: app.yml

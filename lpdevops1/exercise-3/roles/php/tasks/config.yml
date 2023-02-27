@@ -1,0 +1,6 @@
+- name: Copy PHP configuration file
+  ansible.builtin.template:
+    src: php.ini.j2
+    dest: /etc/php/7.4/fpm/php.ini
+  notify:
+      - restart_php-fpm

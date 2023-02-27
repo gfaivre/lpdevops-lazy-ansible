@@ -1,0 +1,8 @@
+---
+# defaults file for php
+php_version:
+  - php7.4
+  - php7.4-fpm
+
+php_max_execution_time: 240
+php_memory_limit: 512M

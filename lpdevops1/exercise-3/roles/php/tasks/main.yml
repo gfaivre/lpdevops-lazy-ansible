@@ -1,0 +1,5 @@
+---
+# tasks file for php
+
+- ansible.builtin.import_tasks: install.yml
+- ansible.builtin.import_tasks: config.yml

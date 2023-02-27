@@ -1,0 +1,13 @@
+---
+- hosts: web
+
+  tasks:
+  - name: Check if host is alive # Description of the task
+    ansible.builtin.ping:
+
+- hosts: db
+
+  tasks:
+  - name: Get stats of a file
+    ansible.builtin.stat:
+      path: /etc/hosts

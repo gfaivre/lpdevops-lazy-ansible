@@ -1,0 +1,18 @@
+all:
+  hosts:
+    debian_vm-02:
+      ansible_host: 192.168.140.59
+      ansible_user: debian
+  children:
+    web:
+      hosts:
+        debian_vm-02:
+    db:
+      hosts:
+        debian_vm-02:
+    app:
+      hosts:
+        debian_vm-02:
+    staging:
+      hosts:
+        debian_vm-02:
